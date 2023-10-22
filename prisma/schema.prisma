@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  username String @unique
+  dateBirth DateTime
+  address String
+  role Role @default(voter)
+  password String
+  vote Vote[]
+}
+
+enum Role {
+  admin
+  voter
+}
+
+model Election {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  election_name String
+  description String
+  start_date DateTime @default(now())
+  end_date DateTime 
+  status Status @default(notFinished)
+  candidate Candidate[]
+  vote Vote[]
+  winner Winner[]
+}
+
+enum Status {
+  finished
+  notFinished
+}
+
+model Candidate {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  foto String
+  electionId  String @db.ObjectId
+  election Election @relation(fields: [electionId], references: [id])
+  vote Vote[]
+  winner Winner[]
+}
+
+model Vote {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  electionId String @db.ObjectId
+  election Election @relation(fields: [electionId], references: [id])
+  candidateId String @db.ObjectId
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+  vote_date DateTime @default(now())
+}
+
+model Winner {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  candidateId String @db.ObjectId
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+  electionId String @db.ObjectId
+  election Election @relation(fields: [electionId], references: [id])
+}
