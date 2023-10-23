@@ -12,3 +12,12 @@ export const validateRegister = (data) => {
 
   return schema.validate(data)
 }
+
+export const validateLogin = (data) => {
+  const schema = Joi.object({
+    username: Joi.string().min(3).max(150).required(),
+    password: Joi.string().min(5).max(255).required()
+  })
+
+  return schema.validate(data)
+}

@@ -1,4 +1,4 @@
-import { prisma } from "@/app/libs/prisma"
+import { prisma } from "@/app/utils/prisma"
 import { NextResponse } from "next/server"
 import { hash } from "bcrypt"
 import { validateRegister } from "@/app/validations/authValidation"
