@@ -6,10 +6,10 @@ import { prisma } from "@/app/utils/prisma"
 
 
 export const GET = async () => {
-    try {
-        const cookieStore = cookies()
+    const cookieStore = cookies()
 
-        const refreshToken = cookieStore.get('refreshToken')
+    const refreshToken = cookieStore.get('refreshToken')
+    try {
 
         if (!refreshToken) {
             return NextResponse.json({

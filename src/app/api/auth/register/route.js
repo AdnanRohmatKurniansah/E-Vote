@@ -4,9 +4,9 @@ import { hash } from "bcrypt"
 import { validateRegister } from "@/app/validations/authValidation"
 
 export const POST = async (req, res) => {
-    try {
-        const requestData = await req.json()
+    const requestData = await req.json()
 
+    try {
         const { error, value } = validateRegister(requestData)
 
         if (error) {
@@ -47,7 +47,7 @@ export const POST = async (req, res) => {
         })
     } catch (error) {
         return NextResponse.json({
-            message: error.message
+            message: error
         }, {
             status: 500
         })

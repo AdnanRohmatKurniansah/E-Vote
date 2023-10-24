@@ -6,10 +6,10 @@ import { cookies } from 'next/headers'
 import { prisma } from "@/app/utils/prisma"
 
 export const POST = async (req, res) => {
-    try {
-        const cookieStore = cookies()
+    const cookieStore = cookies()
 
-        const requestData = await req.json()
+    const requestData = await req.json()
+    try {
 
         const { error, value } = validateLogin(requestData)
 

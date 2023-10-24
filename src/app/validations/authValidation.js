@@ -6,7 +6,7 @@ export const validateRegister = (data) => {
     username: Joi.string().max(100).required(),
     dateBirth: Joi.date().required(),
     address: Joi.string().max(150).required(),
-    role: Joi.string().required(),
+    role: Joi.string(),
     password: Joi.string().min(5).max(255).required(),
   })
 
