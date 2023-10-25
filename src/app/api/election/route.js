@@ -47,13 +47,10 @@ export const POST = async (req, res) => {
             status: 200
         })
     } catch (error) {
-        if (error instanceof PrismaClientValidationError) {
-            console.error(error)
-            return NextResponse.json({
-                message: error
-            }, {
-                status: 500
-            })
-        }
+        return NextResponse.json({
+            message: error
+        }, {
+            status: 500
+        })
     }
 }

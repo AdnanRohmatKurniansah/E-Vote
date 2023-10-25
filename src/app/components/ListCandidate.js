@@ -47,7 +47,7 @@ const candidates = [
 const ListCandidate = () => {
   return (
     <div className='pb-20' style={{ backgroundColor: '#F7FAFC' }}>
-      <h1 className='text-3xl text-center pt-10 my-10 font-extrabold'>List Candidate</h1>
+      <h1 className='text-3xl text-center pt-10 my-10 font-extrabold'>Pemilihan bandar</h1>
       <div className='listCandidate mx-10 md:px-20 md:container  grid grid-cols-1 md:grid-cols-3 gap-8'>
         {candidates.map((candidate) => (
           <Box

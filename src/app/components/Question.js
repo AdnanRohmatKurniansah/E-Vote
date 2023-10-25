@@ -5,7 +5,7 @@ const Question = () => {
   return (
     <div className='px-10 md:px-20 md:container my-20 md:my-32'>
         <h1 className='text-3xl mb-10 font-extrabold text-center'>Frequently Asked</h1>
-        <div className='question px-0 md:px-10'>
+        <div className='question px-0 md:px-10 border border-gray-200 rounded-lg p-10'>
             <Accordion defaultIndex={[0]} allowToggle>
                 <AccordionItem>
                     <h2>
