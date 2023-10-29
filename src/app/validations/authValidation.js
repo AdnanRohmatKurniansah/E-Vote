@@ -21,3 +21,19 @@ export const validateLogin = (data) => {
 
   return schema.validate(data)
 }
+
+export const validateToken = (accesstoken) => {
+  const schema = Joi.object({
+    accessToken: Joi.string().required()
+  })
+
+  return schema.validate(accesstoken)
+}
+
+export const refreshToken = (refreshtoken) => {
+  const schema = Joi.object({
+    refreshToken: Joi.string().required()
+  })
+
+  return schema.validate(refreshtoken)
+}

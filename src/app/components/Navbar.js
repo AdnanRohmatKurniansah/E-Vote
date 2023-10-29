@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Button,
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
@@ -20,9 +21,11 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure()
+  const { data: session } = useSession()
 
   return (
     <Box>
@@ -66,9 +69,18 @@ const Navbar = () => {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-          <Link className='p-3 bg-blue-400 hover:bg-blue-500 text-white rounded-lg' href={'/pages/login'}>
-            Logout
-          </Link>
+          {
+            session ? (
+              <Button onClick={() => signOut({
+                redirect: true,
+                callbackUrl: '/'
+              })} className='p-3 bg-black hover:bg-gray-950 text-white rounded-lg'>Logout</Button>
+            ) : (
+              <Link className='p-3 bg-blue-400 hover:bg-blue-500 text-white rounded-lg' href={'/pages/login'}>
+                Login
+              </Link>
+            )
+          }
         </Stack>
       </Flex>
 
