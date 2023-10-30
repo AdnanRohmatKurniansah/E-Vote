@@ -29,7 +29,7 @@ const Create = () => {
 
   return (
     <AdminLayout>
-      <div className='loginborder max-w-4xl p-5 bg-white border-gray-500'>
+      <div className='max-w-4xl p-5 bg-white border-gray-500'>
           <h1 className='my-5 text-2xl font-semibold'>Add new users</h1>
           <form onSubmit={handleSubmit(addUser)}>
             <FormControl>

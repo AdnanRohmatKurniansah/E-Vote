@@ -40,9 +40,15 @@ const List = () => {
     }
   }
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    const date = new Date(dateString)
+    return date.toLocaleDateString('en-US', options)
+  }
+
   return (
     <AdminLayout>
-      <div className='loginborder max-w-5xl p-5 bg-white border-gray-500'>
+      <div className='loginborder p-5 bg-white border-gray-500'>
         <h1 className='text-2xl mb-10 font-bold'>Lists election</h1>
         <Link href={'/pages/dashboard/election/create'} className='bg-green-600 hover:bg-green-500 p-3 text-white rounded-lg'>Add new</Link>
         <TableContainer className='mt-5'>
@@ -51,6 +57,7 @@ const List = () => {
               <Tr>
                 <Th>No</Th>
                 <Th>Election Name</Th>
+                <Th>Description</Th>
                 <Th>Start date</Th>
                 <Th>End date</Th>
                 <Th>Status</Th>
@@ -63,11 +70,11 @@ const List = () => {
                   <Tr key={i}>
                     <Td>{i + 1}</Td>
                     <Td>{election.election_name}</Td>
-                    <Td>{election.start_date}</Td>
-                    <Td>{election.end_date}</Td>
+                    <Td>{election.description}</Td>
+                    <Td>{formatDate(election.start_date)}</Td>
+                    <Td>{formatDate(election.end_date)}</Td>
                     <Td>{election.status}</Td>
                     <Td>
-                      <Link href={`/pages/dashboard/election/${election.id}`} className='bg-indigo-600 hover:bg-indigo-500 p-3 mr-2 text-white rounded-lg'><ViewIcon /></Link>
                       <Link href={`/pages/dashboard/election/${election.id}`} className='bg-blue-600 hover:bg-blue-500 p-3 mr-2 text-white rounded-lg'><EditIcon /></Link>
                       <Button onClick={() => deleteHandle(election.id)} className='bg-red-600 hover:bg-red-500 p-3 text-white rounded-lg'><DeleteIcon /></Button>
                     </Td>

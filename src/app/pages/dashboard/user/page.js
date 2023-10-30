@@ -41,9 +41,15 @@ const User = () => {
     loadUser()
   }, [])
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    const date = new Date(dateString)
+    return date.toLocaleDateString('en-US', options)
+  }
+
   return (
     <AdminLayout>
-      <div className='loginborder max-w-5xl p-5 bg-white border-gray-500'>
+      <div className='max-w-5xl p-5 bg-white border-gray-500'>
         <h1 className='text-2xl mb-10 font-bold'>Lists user</h1>
         <Link href={'/pages/dashboard/user/create'} className='bg-green-600 hover:bg-green-500 p-3 text-white rounded-lg'>Add new</Link>
         <TableContainer className='mt-5'>
@@ -67,7 +73,7 @@ const User = () => {
                     <Td>{user.name}</Td>
                     <Td>{user.username}</Td>
                     <Td>{user.address}</Td>
-                    <Td>{user.dateBirth}</Td>
+                    <Td>{formatDate(user.dateBirth)}</Td>
                     <Td>{user.role}</Td>
                     <Td>
                       <Link href={`/pages/dashboard/user/${user.id}`} className='bg-blue-600 hover:bg-blue-500 p-3 mr-2 text-white rounded-lg'><EditIcon /></Link>

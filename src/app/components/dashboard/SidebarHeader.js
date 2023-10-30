@@ -17,13 +17,13 @@ import {
 } from '@chakra-ui/react'
 import {
     FiHome,
-    FiTrendingUp,
-    FiCompass,
     FiStar,
     FiSettings,
     FiMenu,
     FiChevronDown,
     FiUserPlus,
+    FiCalendar,
+    FiUsers,
 } from 'react-icons/fi'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -31,8 +31,8 @@ import Link from 'next/link'
 const LinkItems = [
     { name: 'Dashboard', link: '/pages/dashboard', icon: FiHome },
     { name: 'Users', link: '/pages/dashboard/user', icon: FiUserPlus },
-    { name: 'Election', link: '/pages/dashboard/election', icon: FiTrendingUp },
-    { name: 'Explore', link: '/pages/dashboard', icon: FiCompass },
+    { name: 'Election', link: '/pages/dashboard/election', icon: FiCalendar },
+    { name: 'Candidate', link: '/pages/dashboard/candidate', icon: FiUsers },
     { name: 'Favourites', link: '/pages/dashboard', icon: FiStar },
     { name: 'Settings', link: '/pages/dashboard',icon: FiSettings },
 ]

@@ -54,6 +54,33 @@ export const loadElection = async () => {
     }
 }
 
+export const addElection = async (data) => {
+    try {
+        const response = await axios.post(`/api/election`, data)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const detailElection = async (id) => {
+    try {
+        const response = await axios.get(`/api/election/${id}`)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const updateElection = async (id, data) => {
+    try {
+        const response = await axios.put(`/api/election/${id}`, data)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
 export const deleteElection = async (id) => {
     try {
         const response = await axios.delete(`/api/election/${id}`)
