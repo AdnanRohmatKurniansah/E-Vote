@@ -42,7 +42,6 @@ export const authOptions = {
               }
 
               return {
-                id: existUser.id,
                 name: existUser.name,
                 username: existUser.username,
                 dateBirth: existUser.dateBirth,

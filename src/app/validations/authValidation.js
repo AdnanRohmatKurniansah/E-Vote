@@ -22,18 +22,15 @@ export const validateLogin = (data) => {
   return schema.validate(data)
 }
 
-export const validateToken = (accesstoken) => {
+export const validateUpdate = (data) => {
   const schema = Joi.object({
-    accessToken: Joi.string().required()
+    name: Joi.string().min(3).max(150),
+    username: Joi.string().max(100),
+    dateBirth: Joi.date(),
+    address: Joi.string().max(150),
+    role: Joi.string(),
+    password: Joi.string().min(5).max(255),
   })
 
-  return schema.validate(accesstoken)
-}
-
-export const refreshToken = (refreshtoken) => {
-  const schema = Joi.object({
-    refreshToken: Joi.string().required()
-  })
-
-  return schema.validate(refreshtoken)
+  return schema.validate(data)
 }

@@ -26,14 +26,15 @@ import {
     FiUserPlus,
 } from 'react-icons/fi'
 import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 const LinkItems = [
-    { name: 'Dashboard', icon: FiHome },
-    { name: 'Users', icon: FiUserPlus },
-    { name: 'Trending', icon: FiTrendingUp },
-    { name: 'Explore', icon: FiCompass },
-    { name: 'Favourites', icon: FiStar },
-    { name: 'Settings', icon: FiSettings },
+    { name: 'Dashboard', link: '/pages/dashboard', icon: FiHome },
+    { name: 'Users', link: '/pages/dashboard/user', icon: FiUserPlus },
+    { name: 'Election', link: '/pages/dashboard/election', icon: FiTrendingUp },
+    { name: 'Explore', link: '/pages/dashboard', icon: FiCompass },
+    { name: 'Favourites', link: '/pages/dashboard', icon: FiStar },
+    { name: 'Settings', link: '/pages/dashboard',icon: FiSettings },
 ]
 
 export const SidebarContent = ({ onClose, ...rest }) => {
@@ -54,7 +55,7 @@ export const SidebarContent = ({ onClose, ...rest }) => {
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon}>
+          <NavItem key={link.name} link={link.link} icon={link.icon}>
             {link.name}
           </NavItem>
         ))}
@@ -62,13 +63,9 @@ export const SidebarContent = ({ onClose, ...rest }) => {
     )
 }
 
-const NavItem = ({ icon, children, ...rest }) => {
-    return (
-      <Box
-        as="a"
-        href="#"
-        style={{ textDecoration: 'none' }}
-        _focus={{ boxShadow: 'none' }}>
+const NavItem = ({ link, icon, children, ...rest }) => {
+  return (
+    <Link href={link}>
         <Flex
           align="center"
           p="4"
@@ -80,7 +77,8 @@ const NavItem = ({ icon, children, ...rest }) => {
             bg: 'cyan.400',
             color: 'white',
           }}
-          {...rest}>
+          {...rest}
+        >
           {icon && (
             <Icon
               mr="4"
@@ -93,8 +91,8 @@ const NavItem = ({ icon, children, ...rest }) => {
           )}
           {children}
         </Flex>
-      </Box>
-    )
+    </Link>
+  );
 }
 
 export const MobileNav = ({ onOpen, ...rest }) => {

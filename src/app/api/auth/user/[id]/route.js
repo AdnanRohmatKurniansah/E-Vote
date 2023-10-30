@@ -1,17 +1,18 @@
 import { prisma } from "@/app/utils/prisma"
-import { validateElection } from "@/app/validations/electionValidation"
+import { validateUpdate } from "@/app/validations/authValidation"
 import { NextResponse } from "next/server"
 
 export const GET = async (req, {params}) => {
     const id = params.id
+
     try {
-        const election = await prisma.election.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: id
             }
         })
 
-        if (!election) {
+        if (!user) {
             return NextResponse.json({
                 message: 'Election not found'
             }, {
@@ -20,8 +21,8 @@ export const GET = async (req, {params}) => {
         }
 
         return NextResponse.json({
-            message: 'Detail election',
-            data: election
+            message: 'Detail user',
+            data: user
         }, {
             status: 200
         })
@@ -37,41 +38,42 @@ export const GET = async (req, {params}) => {
 export const PUT = async (req, {params}) => {
     const id = params.id
     const requestData = await req.json()
-    
+
     try {
-        const { error, value } = validateElection(requestData) 
+        const { error, value } = validateUpdate(requestData)
 
         if (error) {
             return NextResponse.json({
                 message: error.details
             }, {
-                status: 422,
+                status: 422
             })
         }
 
-        const election = await prisma.election.findFirst({
+        const user = await prisma.user.findUnique({
             where: {
                 id: id
             }
         })
 
-        if (!election) {
+        if (!user) {
             return NextResponse.json({
-                message: 'Election not found'
+                message: 'User not found',
+                data: response
             }, {
                 status: 404
             })
         }
 
-        const response = await prisma.election.update({
+        const response = await prisma.user.update({
             where: {
-                id
+                id: id
             }, 
             data: value
         })
 
         return NextResponse.json({
-            message: 'Successfully updated election',
+            message: 'Successfully updated user',
             data: response
         }, {
             status: 200
@@ -89,13 +91,14 @@ export const DELETE = async (req, {params}) => {
     const id = params.id
 
     try {
-        const response = await prisma.election.delete({
+        const response = await prisma.user.delete({
             where: {
                 id: id
             }
         })
+        
         return NextResponse.json({
-            message: 'Successfully deleted election',
+            message: 'Successfully deleted user',
             data: response
         }, {
             status: 200

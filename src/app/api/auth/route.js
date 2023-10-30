@@ -3,7 +3,13 @@ import { prisma } from "../../utils/prisma"
 
 export const GET = async () => {
     try {
-        const response = await prisma.user.findMany()
+        const response = await prisma.user.findMany({
+            where: {
+                role: {
+                    not: 'admin'
+                }
+            }
+        })
 
         return NextResponse.json({
             message: 'Success call data',

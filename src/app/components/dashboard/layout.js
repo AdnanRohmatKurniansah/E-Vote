@@ -1,11 +1,13 @@
 import { Providers } from '../../provider'
 import { Box, Drawer, DrawerContent, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { MobileNav, SidebarContent } from './SidebarHeader'
+import LoadSession from '../LoadSession'
 
 export default function AdminLayout({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
+    <LoadSession>
       <Providers>
         <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
           <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -26,5 +28,6 @@ export default function AdminLayout({ children }) {
           </Box>
         </Box>
       </Providers>
+    </LoadSession>
   )
 }
