@@ -26,7 +26,7 @@ export const POST = async (req) => {
   const requestData = {
     name: formData.get('name'), 
     description: formData.get('description'), 
-    electionId: formData.get('electionId') 
+    electionId: formData.get('electionId'),
   }
 
   try {
@@ -46,7 +46,7 @@ export const POST = async (req) => {
 
       value.foto = filePath
     } else {
-      console.error('No file uploaded');
+      console.error('No file uploaded')
     }
 
     const response = await prisma.candidate.create({
@@ -54,7 +54,7 @@ export const POST = async (req) => {
     })
 
     return NextResponse.json({
-      message: 'Successfully added new election',
+      message: 'Successfully added new candidate',
       data: response
     }, {
         status: 200

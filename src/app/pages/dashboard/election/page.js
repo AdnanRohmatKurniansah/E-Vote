@@ -4,7 +4,7 @@ import { alert } from '@/app/components/Toast'
 import AdminLayout from '@/app/components/dashboard/layout'
 import { deleteElection, loadElection } from '@/app/libs/api'
 import { DeleteIcon, EditIcon, ViewIcon } from '@chakra-ui/icons'
-import { Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Badge, Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -73,7 +73,10 @@ const List = () => {
                     <Td>{election.description}</Td>
                     <Td>{formatDate(election.start_date)}</Td>
                     <Td>{formatDate(election.end_date)}</Td>
-                    <Td>{election.status}</Td>
+                    <Td>
+                      <Badge variant='solid' colorScheme={election.status  === 'notFinished' ? 'red' : 'green'}>
+                        {election.status}
+                      </Badge></Td>
                     <Td>
                       <Link href={`/pages/dashboard/election/${election.id}`} className='bg-blue-600 hover:bg-blue-500 p-3 mr-2 text-white rounded-lg'><EditIcon /></Link>
                       <Button onClick={() => deleteHandle(election.id)} className='bg-red-600 hover:bg-red-500 p-3 text-white rounded-lg'><DeleteIcon /></Button>

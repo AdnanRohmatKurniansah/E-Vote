@@ -7,5 +7,5 @@ export const uploadImage = async (foto, destinationFolder) => {
     const filePath = join(destinationFolder, fileName)
     const fileData = await foto.arrayBuffer()
     await writeFile(filePath, Buffer.from(fileData))
-    return filePath
+    return filePath.slice(filePath.indexOf('public/') + 7)
 }

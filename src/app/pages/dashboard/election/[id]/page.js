@@ -11,7 +11,7 @@ import { useParams, useRouter } from 'next/navigation'
 const Edit = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { id } = useParams()
-  const { register, handleSubmit, setValue, control } = useForm()
+  const { register, handleSubmit, setValue } = useForm()
   const router = useRouter()
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Edit = () => {
     const response = await updateElection(id, data)
     if (!response.data) {
       setIsLoading(false)
-      alert(response.response.data.message, 'error')
+      alert(response.response.data.message[0].message, 'error')
     } else {
       setIsLoading(false)
       router.push('/pages/dashboard/election')
@@ -73,7 +73,7 @@ const Edit = () => {
           </FormControl>
           <FormControl>
             <FormLabel>Status</FormLabel>
-            <Select required {...register('status')} name='status' control={control} placeholder='Select status'>
+            <Select required {...register('status')} name='status' placeholder='Select status'>
               <option value='notFinished'>Not Finished</option>
               <option value='finished'>Finished</option>
             </Select>

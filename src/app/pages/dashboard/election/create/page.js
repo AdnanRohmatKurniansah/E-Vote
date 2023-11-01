@@ -19,7 +19,7 @@ const Create = () => {
     const response = await addElection(data)
     if (!response.data) {
       setIsLoading(false)
-      alert(response.response.data.message, 'error')
+      alert(response.response.data.message[0].message, 'error')
     } else {
       setIsLoading(false)
       router.push('/pages/dashboard/election')

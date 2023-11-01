@@ -48,7 +48,7 @@ const Edit = () => {
     const response = await updateUser(id, data)
     if (!response.data) {
       setIsLoading(false)
-      alert(response.response.data.message, 'error')
+      alert(response.response.data.message[0].message, 'error')
     } else {
       setIsLoading(false)
       router.push('/pages/dashboard/user')

@@ -4,7 +4,39 @@ import { validateCandidate } from "@/app/validations/candidateValidation"
 import { unlink } from "fs/promises"
 import { NextResponse } from "next/server"
 
-export const PUT = async (req) => {
+export const GET = async (req, {params}) => {
+    const id = params.id
+    try {
+        const candidate = await prisma.candidate.findUnique({
+            where: {
+                id: id
+            }
+        })
+
+        if (!candidate) {
+            return NextResponse.json({
+                message: 'Candidate not found'
+            }, {
+                status: 404
+            })
+        }
+
+        return NextResponse.json({
+            message: 'Detail candidate',
+            data: candidate
+        }, {
+            status: 200
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message: error
+        }, {
+            status: 500
+        })
+    }
+}
+
+export const PUT = async (req, { params }) => {
     const formData = await req.formData()
     const foto = formData.get('foto') 
     const requestData = {
@@ -12,10 +44,7 @@ export const PUT = async (req) => {
       description: formData.get('description'), 
       electionId: formData.get('electionId') 
     }
-    const url = new URL(req.url)
-
-    const segments = url.pathname.split('/')
-    const id = segments[segments.length - 1] || 0
+    const id = params.id
 
     try {
         const { error, value } = validateCandidate(requestData)
@@ -45,7 +74,7 @@ export const PUT = async (req) => {
         if (foto) {
             const destinationFolder = 'public/candidate'
             if (candidate.foto) {
-                await unlink(candidate.foto);
+                await unlink(`public/${candidate.foto}`);
             }
             const filePath = await uploadImage(foto, destinationFolder)
         
@@ -72,10 +101,8 @@ export const PUT = async (req) => {
     }
 }
 
-export const DELETE = async (req) => {
-    const url = new URL(req.url)
-    const segments = url.pathname.split('/')
-    const id = segments[segments.length - 1] || 0
+export const DELETE = async (req, {params}) => {
+    const id = params.id
 
     try {
         const candidate = await prisma.candidate.findFirst({
@@ -84,7 +111,9 @@ export const DELETE = async (req) => {
             }
         })
 
-        await unlink(candidate.foto)
+        if (candidate.foto) {
+            await unlink(`public/${candidate.foto}`)
+        }
 
         const response = await prisma.candidate.delete({
             where: {

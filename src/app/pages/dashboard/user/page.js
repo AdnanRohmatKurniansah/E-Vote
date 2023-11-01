@@ -5,9 +5,8 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { listUser } from '@/app/libs/api'
+import { listUser, deleteUser } from '@/app/libs/api'
 import { alert } from '@/app/components/Toast'
-import { deleteUser } from '@/app/libs/api'
 
 const User = () => {
   const [users, setUsers] = useState([])
