@@ -54,6 +54,33 @@ export const loadElection = async () => {
     }
 }
 
+export const onGoingElection = async () => {
+    try {
+        const response = await axios.get('/api/election/ongoing')
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const onGoingCandidate = async (electionId) => {
+    try {
+        const response = await axios.get(`/api/candidate/ongoing/${electionId}`)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const checkHasVoted = async (data) => {
+    try {
+        const response = await axios.post('/api/vote/chosen', data)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
 export const addElection = async (data) => {
     try {
         const response = await axios.post(`/api/election`, data)
@@ -129,6 +156,15 @@ export const updateCandidate = async (id, data) => {
 export const deleteCandidate = async (id) => {
     try {
         const response = await axios.delete(`/api/candidate/${id}`)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const addVote = async (data) => {
+    try {
+        const response = await axios.post('/api/vote', data)
         return response
     } catch (error) {
         return error

@@ -1,7 +1,7 @@
 'use client'
 
 import AdminLayout from '@/app/components/dashboard/layout'
-import { Button, FormControl, FormLabel, Input, Select, Textarea } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { addElection } from '@/app/libs/api'

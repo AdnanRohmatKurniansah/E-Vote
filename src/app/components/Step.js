@@ -8,9 +8,9 @@ import {
   Divider,
 } from '@chakra-ui/react'
 
-const Step = () => {
+const Step = ({ stepRef }) => {
   return (
-    <Container className='pb-16 md:pb-28' maxW={'7xl'} p="12">
+    <Container ref={stepRef} className='pb-16 md:pb-28' maxW={'7xl'} p="12">
       <Box className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 md:mb-0'>
         <Box
           display="flex"
@@ -58,13 +58,11 @@ const Step = () => {
             </Text>
           </Heading>
           <ul className='mt-3 list-none text-xl'>
-            <li className='my-2'>asdcadcad</li>
+            <li className='my-3'>1. Log in with the account provided by the admin</li>
             <Divider />
-            <li className='my-2'>asdcadcad</li>
+            <li className='my-3'>2. Vote for the candidate you want</li>
             <Divider />
-            <li className='my-2'>asdcadcad</li>
-            <Divider />
-            <li className='my-2'>asdcadcad</li>
+            <li className='my-3'>3. The selected candidates will be announced when the election is over</li>
             <Divider />
           </ul>
         </Box>

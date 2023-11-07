@@ -5,19 +5,14 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl
 
   const protectedPaths = ["/pages/dashboard"]
-  const apiPaths = ["/api/"]
-
+ 
   const matchesProtectedPath = protectedPaths.some((path) =>
     pathname.startsWith(path)
   )
 
-  const matchesApiPath = apiPaths.some((path) =>
-    pathname.startsWith(path)
-  )
-  
   const token = await getToken({ req })
-  if (matchesProtectedPath) {
 
+  if (matchesProtectedPath) {
     if (!token) {
       const url = new URL(`/pages/login`, req.url)
       url.searchParams.set("callbackUrl", encodeURI(req.url))
@@ -27,16 +22,6 @@ export async function middleware(req) {
     if (token.role !== "admin") {
       const url = new URL(`/`, req.url)
       return NextResponse.rewrite(url)
-    }
-  }
-
-  if (matchesApiPath) {
-    if (!token) {
-      return NextResponse.json({
-        message: 'Unauthorized'
-      }, { 
-        status: 403 
-      })
     }
   }
 

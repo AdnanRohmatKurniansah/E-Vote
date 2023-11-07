@@ -1,6 +1,5 @@
 import { prisma } from "@/app/utils/prisma"
 import { validateElection } from "@/app/validations/electionValidation"
-import { PrismaClientValidationError } from "@prisma/client/runtime/library"
 import { NextResponse } from "next/server"
 
 export const GET = async () => {

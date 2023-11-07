@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Step from './components/Step'
 import ListCandidate from './components/ListCandidate'
 import Question from './components/Question'
+import { useRef } from 'react'
 
 export default function Home() {
   const Blur = (IconProps) => {
@@ -29,20 +30,26 @@ export default function Home() {
     )
   }
 
+  const stepRef = useRef(null)
+
+  const handleScrollToStep = () => {
+    stepRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <div className='home'>
       <Navbar />
-      <div className='hero px-10 md:container md:px-64 h-screen flex flex-col justify-center'>
+      <div className='hero  relative px-10 md:container md:px-64 h-screen flex flex-col justify-center'>
         <h1 className='text-5xl md:text-6xl text-center font-extrabold'>Vote for the <span className='text-blue-500'>candidate</span> you want</h1>
         <div className='desc text-center mt-5 md:mt-10'>
           <h2 className='text-xl md:text-2xl'>Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.</h2>
         </div>
         <div className='go mx-auto mt-5'>
-         <Button size={'lg'} className='bg-blue-500 hover:bg-blue-400 text-white'>Vote now</Button>
+         <Button onClick={handleScrollToStep} size={'lg'} className='bg-blue-500 hover:bg-blue-400 text-white'>Vote now</Button>
         </div>
-        <Blur position={'absolute'} top={-10} left={-10} style={{ filter: 'blur(70px)' }} />
+        <Blur position={'absolute'} top={0} left={0} style={{ filter: 'blur(70px)' }} />
       </div>
-      <Step />
+      <Step stepRef={stepRef}/>
       <ListCandidate />
       <Question />
       <Footer />

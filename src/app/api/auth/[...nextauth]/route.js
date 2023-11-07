@@ -42,6 +42,7 @@ export const authOptions = {
               }
 
               return {
+                id: existUser.id,
                 name: existUser.name,
                 username: existUser.username,
                 dateBirth: existUser.dateBirth,
@@ -54,6 +55,7 @@ export const authOptions = {
     callbacks: {
       async jwt({ token, user }) {
         if (user) {
+          token.id = user.id
           token.username = user.username
           token.role = user.role
         }
@@ -61,6 +63,7 @@ export const authOptions = {
       },
       async session({ session, token }) {
         if (token) {
+          session.user.id = token.id
           session.user.username = token.username
           session.user.role = token.role
         }

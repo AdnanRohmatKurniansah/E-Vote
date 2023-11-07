@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { deleteCandidate, loadCandidate, loadElection } from '@/app/libs/api'
 import { alert } from '@/app/components/Toast'
 import AdminLayout from '@/app/components/dashboard/layout'
-import { Button, Img, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Avatar, Button, Img, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import Link from 'next/link'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
@@ -76,7 +76,7 @@ const Candidate = () => {
                 <Tr key={i}>
                   <Td>{i + 1}</Td>
                   <Td>
-                    <Img width={'80px'} src={candidate.foto} />
+                    <Img width={'80px'} src={candidate.foto} alt={`foto ${i}`}/>
                   </Td>
                   <Td>{candidate.name}</Td>
                   <Td>{candidate.description}</Td>

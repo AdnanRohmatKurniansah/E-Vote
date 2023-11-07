@@ -28,7 +28,7 @@ enum Role {
 
 model Election {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  electon_name String
+  election_name String
   description String
   start_date DateTime @default(now())
   end_date DateTime
