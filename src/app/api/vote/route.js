@@ -4,6 +4,30 @@ import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 import { authOptions } from "../auth/[...nextauth]/route"
 
+export const GET = async (req, res) => {
+    const searchParams = req.nextUrl.searchParams   
+    const electionId = searchParams.get('electionId') 
+    const candidateId = searchParams.get('candidateId') 
+    try {
+        const response = await prisma.vote.count({
+            where: {
+                electionId: electionId,
+                candidateId: candidateId
+            }
+        }) 
+        return NextResponse.json({
+            message: 'Successfully call vote count',
+            data: response
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message: error
+        }, {
+            status: 500
+        })
+    }
+}
+
 export const POST = async (req, res) => {
     const requestData = await req.json()
     try {

@@ -170,3 +170,21 @@ export const addVote = async (data) => {
         return error
     }
 }
+
+export const getCandidateVoteCount = async (electionId, candidateId) => {
+    try {
+        const response = await axios.get(`/api/vote?electionId=${electionId}&candidateId=${candidateId}`)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const closeElection = async (id) => {
+    try {
+        const response = await axios.put(`/api/election/close/${id}`)
+        return response
+    } catch (error) {
+        return error
+    }
+}
