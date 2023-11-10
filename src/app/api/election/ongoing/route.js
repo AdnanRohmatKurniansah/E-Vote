@@ -3,11 +3,7 @@ import { NextResponse } from "next/server"
 
 export const GET = async () => {
     try {
-        const response = await prisma.election.findFirst({
-            where: {
-                status: 'notFinished'
-            }
-        })
+        const response = await prisma.election.findFirst()
 
         return NextResponse.json({
             message: 'Success call elections data',

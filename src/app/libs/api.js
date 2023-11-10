@@ -188,3 +188,12 @@ export const closeElection = async (id) => {
         return error
     }
 }
+
+export const loadWinner = async (electionId) => {
+    try {
+        const response = await axios.get(`/api/winner/${electionId}`)
+        return response
+    } catch (error) {
+        return error
+    }
+}

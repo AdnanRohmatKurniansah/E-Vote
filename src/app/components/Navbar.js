@@ -233,14 +233,6 @@ const MobileNavItem = ({ label, children, href }) => {
 }
 
 const NAV_ITEMS = [
-  {
-    label: 'Vote Candidate',
-    href: '#',
-  },
-  {
-    label: 'Quick Count',
-    href: '#',
-  },
 ]
 
 export default Navbar
