@@ -1,18 +1,10 @@
 'use client'
 
-import {
-    Box,
-    Flex,
-    SimpleGrid,
-    Stat,
-    StatLabel,
-    StatNumber,
-    useColorModeValue,
-  } from '@chakra-ui/react'
-  import { BsPerson } from 'react-icons/bs'
-  import { FiServer } from 'react-icons/fi'
-  import { GoLocation } from 'react-icons/go'
+import { Box, Flex, SimpleGrid, Stat, StatLabel, StatNumber, useColorModeValue } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { BsAwardFill, BsFillCalendarCheckFill, BsFillPersonLinesFill, BsPerson } from 'react-icons/bs'
 import AdminLayout from "@/app/components/dashboard/layout"
+import { loadStats } from '@/app/libs/api'
 
 function StatsCard(props) {
     const { title, stat, icon } = props
@@ -43,18 +35,33 @@ function StatsCard(props) {
         </Flex>
       </Stat>
     )
-  }
+}
 
 const Dashboard = () => {
+    const [stats, setStats] = useState([])
+
+    const loadHandle = async () => {
+      const response = await loadStats()
+      if (response.data) {
+        setStats(response.data)
+      } else {
+        console.log(response.response.data.message)
+      }
+    }
+
+    useEffect(() => {
+      loadHandle()
+    }, [])
+
     return (
         <AdminLayout>
-            <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
-                <StatsCard title={'Users'} stat={'5,000'} icon={<BsPerson size={'3em'} />} />
-                <StatsCard title={'Candidates'} stat={'1,000'} icon={<FiServer size={'3em'} />} />
-                <StatsCard title={'Elections'} stat={'7'} icon={<GoLocation size={'3em'} />} />
-                <StatsCard title={'Winners'} stat={'7'} icon={<GoLocation size={'3em'} />} />
-            </SimpleGrid>
+             <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+                    <StatsCard title={'Users'} stat={stats.user} icon={<BsPerson size={'3em'} />} />
+                    <StatsCard title={'Candidates'} stat={stats.candidate} icon={<BsFillPersonLinesFill size={'3em'} />} />
+                    <StatsCard title={'Elections'} stat={stats.election} icon={<BsFillCalendarCheckFill size={'3em'} />} />
+                    <StatsCard title={'Winners'} stat={stats.winner} icon={<BsAwardFill size={'3em'} />} />
+                </SimpleGrid>
             </Box>
         </AdminLayout>
     )

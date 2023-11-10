@@ -197,3 +197,21 @@ export const loadWinner = async (electionId) => {
         return error
     }
 }
+
+export const listWinner = async () => {
+    try {
+        const response = await axios.get(`/api/winner`)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+export const loadStats = async () => {
+    try {
+        const response = await axios.get('/api/stats')
+        return response
+    } catch (error) {
+        return error
+    }
+}

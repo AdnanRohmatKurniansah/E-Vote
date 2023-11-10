@@ -3,7 +3,7 @@
 import AdminLayout from '@/app/components/dashboard/layout'
 import { Img, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { loadCandidate, loadElection, loadWinner } from '@/app/libs/api'
+import { listWinner, loadCandidate, loadElection } from '@/app/libs/api'
 
 const Winner = () => {
   const [candidates, setCandidates] = useState([])
@@ -31,7 +31,7 @@ const Winner = () => {
   }
 
   const loadHandle = async () => {
-    const response = await loadWinner()
+    const response = await listWinner()
 
     if (response.data) {
       setWinners(response.data.data)
